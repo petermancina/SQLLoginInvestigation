@@ -39,8 +39,7 @@ Below we see that my query yielded 19 failed login attempts after hours from May
 </p>
 
 <h2>Retrieve login attempts on specific dates</h2>
-Since the suspicious incident we have been alerted to was from yesterday, May 9th, lets hone in on yesterday's login attempts and the day before to see if there is anything in those logs that might give me more information. To return those two dates I will use the OR operator rather than AND because we would like to see records that are either from May 8th or 9th, that is, we want to see both types of records (individual records do not need to match both conditions May 8th and May 9th).
-</p>
+Since the suspicious incident we have been alerted to was from yesterday, May 9th, lets hone in on yesterday's login attempts and the day before to see if there is anything in those logs that might give me more information. To return those two dates I will use the <b>OR</b> operator rather than AND because we would like to see records that are either from May 8th or 9th, that is, we want to see both types of records (individual records do not need to match both conditions May 8th and May 9th).
 <pre><b>SELECT * 
 FROM log_in_attempts 
 WHERE login_date = '2022-05-09' OR login_date = '2022-05-08';</b></pre>
@@ -49,11 +48,11 @@ WHERE login_date = '2022-05-09' OR login_date = '2022-05-08';</b></pre>
 <img src="https://i.imgur.com/9MMwxZL.png" height="100%" width="100%" alt="Read the file contents"/>
 </p>
 <h2>Retrieve login attempts outside of Mexico</h2>
-Our team has ruled out that any Mexico-based login attempts are true positives (real intrusion attempts), so we need to remove those records from our results and look at all non-Mexico login attempts. To do this, we will use the NOT operator, which tells the database to exclude a specified value:
+Our team has ruled out that any Mexico-based login attempts are true positives (real intrusion attempts), so we need to remove those records from our results and look at all non-Mexico login attempts. To do this, we will use the <b>NOT</b> operator, which tells the database to exclude a specified value:
 <pre><b>SELECT *
 FROM log_in_attempts
 WHERE NOT country LIKE 'MEX%';</b></pre>
-In this query, we are telling the database to not include records where the value in the country column begins with MEX. We do this because sometimes people entering data in a database might use different conventions to refer to the same thing like a country name. In this case, the column country in the log_in_attempts table contains values "MEX" and "MEXICO" that both refer to the country Mexico. To return all records for login attempts from Mexico, we use the % wildcard which tells the database to include any values starting with MEX and continuing with any character and that is any number of characters long. When we use the % wildcard, we cannot use the equals sign = as the operator, but rather the operator LIKE.
+In this query, we are telling the database to not include records where the value in the country column begins with MEX. We do this because sometimes people entering data in a database might use different conventions to refer to the same thing like a country name. In this case, the column country in the <b>log_in_attempts</b> table contains values "MEX" and "MEXICO" that both refer to the country Mexico. To return all records for login attempts from Mexico, we use the % wildcard which tells the database to include any values starting with MEX and continuing with any character and that is any number of characters long. When we use the % wildcard, we cannot use the equals sign = as the operator, but rather the operator <b>LIKE</b>.
 <p align="center">
 <br/>
 <img src="https://i.imgur.com/NZUOtGW.png" height="100%" width="100%" alt="Convert the string into a list"/>
@@ -61,7 +60,7 @@ In this query, we are telling the database to not include records where the valu
 The query yielded records only for the United States and Canada, with all Mexico entries removed.
 
 <h2>Retrieve employees in Marketing</h2>
-Since a major motivation of many attackers is financial, we can use SQL to identify accounts in Marketing, Sales, and Finance that may be targeted. For this query, I will request data from the employees table. To get a quick look at what this table contains before I make a more narrow query, I will issue a query to return all columns and all records:
+Since a major motivation of many attackers is financial, we can use SQL to identify accounts in Marketing, Sales, and Finance that may be targeted. For this query, I will request data from the <b>employees</b> table. To get a quick look at what this table contains before I make a more narrow query, I will issue a query to return all columns and all records:
 <pre><b>SELECT *
 FROM employees;</b></pre>
 <p align="center">
@@ -78,7 +77,7 @@ WHERE department = "Marketing' AND office LIKE 'East%';</b></pre>
 </p>
 
 <h2>Retrieve employees in Finance or Sales</h2>
-Now I will investigate employee user accounts in Finance and Sales. To return user accounts from either Finance or Sales in one table, I will use the OR operator again:
+Now I will investigate employee user accounts in Finance and Sales. To return user accounts from either Finance or Sales in one table, I will use the <b>OR</b> operator again:
 <pre><b>SELECT *
 FROM employees
 WHERE department = 'Finance' OR department = 'Sales';</b></pre>
