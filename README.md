@@ -35,7 +35,7 @@ You end your SQL query with the semi-colon which tells the database that this is
 Below we see that my query yielded 19 failed login attempts after hours from May 9-12 in Mexico, Canada, and the US.
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/PiQmF8b.png" height="100%" width="100%" alt="Read the file contents"/>
+<img src="https://i.imgur.com/PiQmF8b.png" height="100%" width="100%" alt="19 Failed login attempts"/>
 </p>
 
 <h2>Retrieve login attempts on specific dates</h2>
@@ -45,7 +45,7 @@ FROM log_in_attempts
 WHERE login_date = '2022-05-09' OR login_date = '2022-05-08';</b></pre>
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/9MMwxZL.png" height="100%" width="100%" alt="Read the file contents"/>
+<img src="https://i.imgur.com/9MMwxZL.png" height="100%" width="100%" alt="Login attempts on specific dates image"/>
 </p>
 <h2>Retrieve login attempts outside of Mexico</h2>
 Our team has ruled out that any Mexico-based login attempts are true positives (real intrusion attempts), so we need to remove those records from our results and look at all non-Mexico login attempts. To do this, we will use the <b>NOT</b> operator, which tells the database to exclude a specified value:
@@ -55,7 +55,7 @@ WHERE NOT country LIKE 'MEX%';</b></pre>
 In this query, we are telling the database to not include records where the value in the country column begins with MEX. We do this because sometimes people entering data in a database might use different conventions to refer to the same thing like a country name. In this case, the column country in the <b>log_in_attempts</b> table contains values "MEX" and "MEXICO" that both refer to the country Mexico. To return all records for login attempts from Mexico, we use the % wildcard which tells the database to include any values starting with MEX and continuing with any character and that is any number of characters long. When we use the % wildcard, we cannot use the equals sign = as the operator, but rather the operator <b>LIKE</b>.
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/NZUOtGW.png" height="100%" width="100%" alt="Convert the string into a list"/>
+<img src="https://i.imgur.com/NZUOtGW.png" height="100%" width="100%" alt="Login attempts outside of Mexico image"/>
 </p>
 The query yielded records only for the United States and Canada, with all Mexico entries removed.
 
@@ -65,7 +65,7 @@ Since a major motivation of many attackers is financial, we can use SQL to ident
 FROM employees;</b></pre>
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/srSr1Y0.png" height="100%" width="100%" alt="Iterate through the remove list and remove IP addresses from the allow list"/>
+<img src="https://i.imgur.com/srSr1Y0.png" height="100%" width="100%" alt="All Employees image"/>
 </p>
 Now that I know what is in the table - employee_id, device_id, username, department, and office - I will narrow my query so that the database only returns employee accounts in the Marketing department. I also can further narrow the query so that it returns only accounts in a particular building. In this case, my team suspects suspicious activity related to a Marketing account in the East building, so I will narrow my query to the following: 
 <pre><b>SELECT *
@@ -73,7 +73,7 @@ FROM employees
 WHERE department = "Marketing' AND office LIKE 'East%';</b></pre>
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/FpMc2ga.png" height="100%" width="100%" alt="Iterate through the remove list and remove IP addresses from the allow list"/>
+<img src="https://i.imgur.com/FpMc2ga.png" height="100%" width="100%" alt="Employees in Marketing image"/>
 </p>
 
 <h2>Retrieve employees in Finance or Sales</h2>
@@ -83,7 +83,7 @@ FROM employees
 WHERE department = 'Finance' OR department = 'Sales';</b></pre>
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/YOyLl5R.png" height="100%" width="100%" alt="Update the file with the revised list of IP addresses"/>
+<img src="https://i.imgur.com/YOyLl5R.png" height="100%" width="100%" alt="Employees in Finance or Sales image"/>
 </p>
 
 <h2>Retrieve all employees not in IT</h2>
@@ -93,7 +93,7 @@ FROM employees
 WHERE NOT department = 'Information Technology';</b></pre>
 <p align="center">
 <br/>
-<img src="https://i.imgur.com/HWvlbkN.png" height="100%" width="100%" alt="Call your function and check that it worked"/>
+<img src="https://i.imgur.com/HWvlbkN.png" height="100%" width="100%" alt="All employees not in IT image"/>
 </p>
 
 <h2>Summary</h2>
