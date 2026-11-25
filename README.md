@@ -1,4 +1,4 @@
-<h1>Investigate Suspicious Login Attempts with SQL queries</h1>
+<h1>Investigating Suspicious Login Attempts with SQL queries</h1>
 
 <h2>Project Description</h2>
 SQL is a query language that we can use to query relational databases like MariaDB PostgreSQL, SQLite, Microsoft SQL Server, and Oracle Database among others. We can use SQL to obtain database information about our users, employees, devices, and various processes on our network. We might for instance use SQL to view data about login attempts to investigate possible brute force password attacks or to view where in the world users are attempting to login from. We can access SQL through the Linux command line and issue direct queries to a database in a manner which returns tailored datasets organized in exactly the way that we want to view the data so we can drill down and get answers. In this project, I will demonstrate how to use SQL to investigate failed login attempts, login attempts on specific dates, login attempts in specific geographic areas, and how to identify employees in various departments and buildings of a company. The dataset for this project is fictitious and comes from Chinook.
